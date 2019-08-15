@@ -1,5 +1,8 @@
 package com.techcrevices.recyclerviewexample;
 
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,13 +11,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+
+import java.io.Serializable;
 import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder> {
 
     private List<MovieModel> movieModels;
-    public MovieAdapter(List<MovieModel> movieModels) {
+    Context context;
+    public MovieAdapter(List<MovieModel> movieModels, Context context) {
         this.movieModels = movieModels;
+        this.context = context;
     }
 
     @NonNull
@@ -26,12 +34,26 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
 
         MovieModel model = movieModels.get(position);
         holder.movieTitle.setText(model.getMovieName());
         holder.movieType.setText(model.getMovieType());
         holder.movieYear.setText(model.getMovieYear());
+        holder.movieYear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Gson gson = new Gson();
+                String json = gson.toJson(movieModels);
+
+                Log.e("SSSSS",String.valueOf(movieModels));
+                Intent i = new Intent(context, Main2Activity.class);
+                i.putExtra("listitem",  json);
+                i.putExtra("position",String.valueOf(position));
+                context.startActivity(i);
+            }
+        });
 
     }
 

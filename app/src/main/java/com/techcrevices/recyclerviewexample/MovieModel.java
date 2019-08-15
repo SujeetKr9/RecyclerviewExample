@@ -1,6 +1,8 @@
 package com.techcrevices.recyclerviewexample;
 
-public class MovieModel {
+import java.io.Serializable;
+
+public class MovieModel implements Serializable {
 
     String movieName;
     String movieType;

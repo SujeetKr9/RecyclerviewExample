@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         prepareMovieData();
 
-        movieAdapter = new MovieAdapter(movieModels);
+        movieAdapter = new MovieAdapter(movieModels, MainActivity.this);
         recyclerView.setAdapter(movieAdapter);
 
     }
