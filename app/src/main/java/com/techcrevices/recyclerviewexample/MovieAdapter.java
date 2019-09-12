@@ -20,7 +20,7 @@ import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder> {
 
-    int row_index = 0;
+    int row_index = -1;
 
     private List<MovieModel> movieModels;
     Context context;
