@@ -80,9 +80,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
         });
 
         if (row_index==position) {
-            holder.movieTitle.setTextColor(Color.RED);
+            holder.linearLayout.setBackgroundColor(Color.RED);
         } else {
-            holder.movieTitle.setTextColor(Color.BLACK);
+            holder.linearLayout.setBackgroundColor(Color.parseColor("#dddddd"));
         }
 
     }
