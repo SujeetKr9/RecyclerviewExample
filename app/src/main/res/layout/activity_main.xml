@@ -19,17 +19,22 @@
             >
 
             <androidx.recyclerview.widget.RecyclerView
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/recyclerView"
                 >
-
-
-
-
             </androidx.recyclerview.widget.RecyclerView>
 
 
+
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/fragment"
+                >
+            </FrameLayout>
 
 
         </LinearLayout>

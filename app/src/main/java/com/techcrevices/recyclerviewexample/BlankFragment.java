@@ -1,48 +1,44 @@
 package com.techcrevices.recyclerviewexample;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
+import android.net.Uri;
+import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
 
+public class BlankFragment extends Fragment {
     private RecyclerView recyclerView;
     private List<MovieModel> movieModels = new ArrayList<>();
     private MovieAdapter movieAdapter;
-
+    View v;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        v = inflater.inflate(R.layout.fragment_blank, container, false);
 
-        // OK
-
-
-        recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,RecyclerView.VERTICAL,false);
+        recyclerView = (RecyclerView)v.findViewById(R.id.recyclerView);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(),RecyclerView.VERTICAL,false);
         recyclerView.setLayoutManager(linearLayoutManager);
 
         prepareMovieData();
 
-        movieAdapter = new MovieAdapter(movieModels, MainActivity.this);
+        movieAdapter = new MovieAdapter(movieModels, getActivity());
         recyclerView.setAdapter(movieAdapter);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        BlankFragment fragmentOne = new BlankFragment();
-        fragmentTransaction.add(R.id.fragment, fragmentOne);
-        fragmentTransaction.commit();
-
-
-
+        return v;
     }
 
     private void prepareMovieData() {
@@ -94,6 +90,21 @@ public class MainActivity extends AppCompatActivity {
         movie = new MovieModel("Guardians of the Galaxy", "Science Fiction & Fantasy", "2014");
         movieModels.add(movie);
 
-       // mAdapter.notifyDataSetChanged();
+        // mAdapter.notifyDataSetChanged();
     }
+
+    public void openDialog(){
+
+        Dialog dialog = new Dialog(getActivity().getApplicationContext());
+        dialog.setCancelable(true);
+
+        dialog.setContentView(R.layout.dialog);
+
+
+
+
+
+        dialog.show();
+    }
+
 }
