@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,7 +21,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder> {
-
+    private int lastPosition = -1;
     int row_index = -1;
 
     private List<MovieModel> movieModels;
@@ -85,6 +87,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
             holder.linearLayout.setBackgroundColor(Color.parseColor("#dddddd"));
         }
 
+
+        setAnimation(holder.itemView, position);
+
+
     }
 
     @Override
@@ -104,6 +110,20 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
             movieYear = (TextView)itemView.findViewById(R.id.movieYear);
 
             linearLayout = (LinearLayout)itemView.findViewById(R.id.linearLayout);
+        }
+    }
+
+
+    private void setAnimation(View viewToAnimate, int position) {
+        // If the bound view wasn't previously displayed on screen, it's animated
+        if (position > lastPosition) {
+            //TranslateAnimation anim = new TranslateAnimation(0,-1000,0,-1000);
+            ScaleAnimation anim = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+            //anim.setDuration(new Random().nextInt(501));//to make duration random number between [0,501)
+            anim.setDuration(550);//to make duration random number between [0,501)
+            viewToAnimate.startAnimation(anim);
+            lastPosition = position;
+
         }
     }
 }
